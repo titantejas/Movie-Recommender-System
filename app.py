@@ -4,8 +4,10 @@ import requests
 
 import requests
 
+api_key = st.secrets["TMDB_API_KEY"]
+
 def fetch_poster(movie_id):
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US"
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
     
     try:
         response = requests.get(url, timeout=5)  # timeout added
@@ -43,8 +45,8 @@ def recommend(movie):
 
 
 st.header('Movie Recommender System')
-movies = pickle.load(open('C:/python/Movie-Recommender-System/movie_list.pkl','rb'))
-similarity = pickle.load(open('C:/python/Movie-Recommender-System/similarity.pkl','rb'))
+movies = pickle.load(open('movie_list.pkl', 'rb'))
+similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
